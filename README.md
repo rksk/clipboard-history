@@ -1,0 +1,68 @@
+# Clipboard History
+
+A lightweight macOS clipboard history manager. Stores up to 50 clipboard entries and lets you browse and paste them via a native macOS dialog.
+
+## Requirements
+
+- macOS 12 or later
+- Python 3 (included with macOS)
+
+## Installation
+
+### 1. Clone the repo
+
+```bash
+git clone <repo-url> ~/.clipboard-history
+```
+
+### 2. Install the Services menu trigger
+
+```bash
+python3 ~/.clipboard-history/build_service.py
+```
+
+This creates an Automator Quick Action at `~/Library/Services/Clipboard History.workflow`.
+
+### 3. Set up the background monitor
+
+Copy the LaunchAgent plist, replacing `YOUR_USERNAME` with your actual username:
+
+```bash
+sed "s/YOUR_USERNAME/$(whoami)/g" \
+    ~/.clipboard-history/com.clipboard-history.monitor.plist \
+    > ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
+```
+
+Load it so it starts now and on every login:
+
+```bash
+launchctl load ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
+```
+
+### 4. Grant permissions
+
+On first use macOS will prompt for:
+
+- **Accessibility** — allows `chooser.py` to simulate `Cmd+V` to paste
+- **Automation** — allows `osascript` to control System Events
+
+You can also grant these in advance under **System Settings → Privacy & Security**.
+
+### 5. Assign a keyboard shortcut (recommended)
+
+1. Open **System Settings → Keyboard → Keyboard Shortcuts → Services**
+2. Find **Clipboard History** under General
+3. Assign a shortcut (e.g. `⌘⇧V`)
+
+## Usage
+
+Trigger via the assigned keyboard shortcut, or from any app's **Services** menu. A dialog lists your recent clipboard items — select one to paste it into the active app.
+
+## Uninstall
+
+```bash
+launchctl unload ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
+rm ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
+rm -rf ~/Library/Services/Clipboard\ History.workflow
+rm -rf ~/.clipboard-history
+```
