@@ -58,6 +58,23 @@ You can also grant these in advance under **System Settings → Privacy & Securi
 
 Trigger via the assigned keyboard shortcut, or from any app's **Services** menu. A dialog lists your recent clipboard items — select one to paste it into the active app.
 
+## How it works
+
+Three scripts work together:
+
+- **`monitor.sh`** — background daemon that polls `pbpaste` every second, base64-encodes entries, deduplicates, and appends to `~/.clipboard-history/history` (capped at 50 items)
+- **`chooser.py`** — reads the history file, shows a native macOS `osascript` "choose from list" dialog, then restores the selected item to clipboard via `pbcopy` and auto-pastes with `Cmd+V`
+- **`build_service.py`** — generates the Automator Quick Action plist at `~/Library/Services/Clipboard History.workflow`
+
+No external dependencies — only macOS built-ins (`pbpaste`, `pbcopy`, `osascript`). Base64 encoding handles multiline text and special characters safely in the flat history file. `chooser.py` collapses whitespace and truncates to 72 chars for display, but restores the full original content.
+
+To run the scripts directly without the Services menu:
+
+```bash
+bash monitor.sh &       # start the monitor daemon
+python3 chooser.py      # launch the chooser dialog
+```
+
 ## Uninstall
 
 ```bash
