@@ -29,7 +29,7 @@ workflow = {
                     "shell": "/bin/bash",
                     "source": ""
                 },
-                "BundleIdentifier": "com.apple.automator.runshellscript",
+                "BundleIdentifier": "com.apple.RunShellScript",
                 "CFBundleVersion": "2.0.3",
                 "CanShowSelectedItemsWhenRun": False,
                 "CanShowWhenRun": True,
@@ -51,11 +51,17 @@ workflow = {
     ],
     "connectors": {},
     "workflowMetaData": {
-        "serviceApplicationBundleID": "com.apple.finder",
-        "serviceApplicationPath": "/System/Library/CoreServices/Finder.app",
-        "serviceInputTypeIdentifier": "com.apple.automator.nothing",
-        "serviceOutputTypeIdentifier": "com.apple.automator.nothing",
-        "serviceProcessesInput": 0,
+        "applicationBundleIDsByPath": {},
+        "applicationPaths": [],
+        "inputTypeIdentifier": "com.apple.Automator.nothing",
+        "outputTypeIdentifier": "com.apple.Automator.nothing",
+        "presentationMode": 11,
+        "processesInput": False,
+        "serviceInputTypeIdentifier": "com.apple.Automator.nothing",
+        "serviceOutputTypeIdentifier": "com.apple.Automator.nothing",
+        "serviceProcessesInput": False,
+        "systemImageName": "NSActionTemplate",
+        "useAutomaticInputType": False,
         "workflowTypeIdentifier": "com.apple.Automator.servicesMenu"
     }
 }
@@ -64,6 +70,12 @@ with open(service_dir / "document.wflow", "wb") as f:
     plistlib.dump(workflow, f)
 
 info = {
+    "CFBundleIdentifier": "com.apple.automator.Clipboard-History",
+    "CFBundleName": "Clipboard History",
+    "CFBundlePackageType": "APPL",
+    "CFBundleShortVersionString": "1.0",
+    "CFBundleVersion": "1",
+    "NSPrincipalClass": "AMWorkflowController",
     "NSServices": [
         {
             "NSMenuItem": {"default": "Clipboard History"},
