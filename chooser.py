@@ -24,12 +24,12 @@ def alert(msg: str):
 
 
 # ── Load history ──────────────────────────────────────────────────────────────
-if not os.path.exists(HISTORY_FILE):
+try:
+    with open(HISTORY_FILE) as f:
+        lines = [l.strip() for l in f if l.strip()]
+except FileNotFoundError:
     alert("No clipboard history yet. Start copying some text!")
     sys.exit(0)
-
-with open(HISTORY_FILE) as f:
-    lines = [l.strip() for l in f if l.strip()]
 
 if not lines:
     alert("Clipboard history is empty.")

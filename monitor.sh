@@ -13,9 +13,8 @@ while true; do
     current=$(pbpaste 2>/dev/null)
     if [[ -n "$current" && "$current" != "$last" ]]; then
         last="$current"
-        # Encode to base64 (single line) so we can safely store multiline content
-        encoded=$(printf '%s' "$current" | python3 -c \
-            "import sys, base64; print(base64.b64encode(sys.stdin.buffer.read()).decode())")
+        # base64-encode so multiline/special chars are safe in the flat history file
+        encoded=$(printf '%s' "$current" | base64 | tr -d '\n')
         tmpfile=$(mktemp)
         # Put newest item first, remove duplicates, cap at MAX_ITEMS
         echo "$encoded" > "$tmpfile"
