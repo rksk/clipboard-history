@@ -50,9 +50,14 @@ You can also grant these in advance under **System Settings → Privacy & Securi
 
 ### 5. Assign a keyboard shortcut (recommended)
 
-1. Open **System Settings → Keyboard → Keyboard Shortcuts → Services**
-2. Find **Clipboard History** under General
-3. Assign a shortcut (e.g. `⌘⇧V`)
+1. Open **System Settings → Keyboard → Keyboard Shortcuts**
+2. Select **Services** in the left sidebar
+3. Scroll to find **Clipboard History** (under General)
+4. Double-click the empty space to the right of it
+5. Press your desired shortcut (e.g. `⌘ + ⇧ + V`)
+6. Click **Done**
+
+If the shortcut doesn't trigger, another app may have a conflicting binding — try a different combination.
 
 ## Usage
 
