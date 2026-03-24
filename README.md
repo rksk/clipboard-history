@@ -1,6 +1,8 @@
 # Clipboard History
 
-A lightweight macOS clipboard history manager. Stores up to 50 clipboard entries and lets you browse and paste them via a native macOS dialog.
+A lightweight macOS clipboard history manager. Stores up to 50 clipboard entries and lets you browse and paste them via a native macOS dialog. 
+
+No third-party dependencies, no cloud sync, just local scripts using built-in tools.
 
 ## Requirements
 
