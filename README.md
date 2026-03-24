@@ -1,10 +1,10 @@
 # Clipboard History
 
-![ui](image.png)
-
 A super lightweight macOS clipboard history manager. Stores up to 50 clipboard entries and lets you browse and paste them via a native macOS dialog. 
 
 No third-party dependencies, no cloud sync, just 2 scripts running locally.
+
+![ui](image.png)
 
 ## Requirements
 
