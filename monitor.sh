@@ -7,8 +7,7 @@ HISTORY_FILE="$HISTORY_DIR/history"
 MAX_ITEMS=50
 MAX_ENTRY_BYTES=65536
 
-mkdir -p "$HISTORY_DIR"
-chmod 700 "$HISTORY_DIR"
+mkdir -p -m 700 "$HISTORY_DIR"
 [ -f "$HISTORY_FILE" ] || install -m 600 /dev/null "$HISTORY_FILE"
 
 last=""

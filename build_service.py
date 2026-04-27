@@ -3,7 +3,7 @@
 import plistlib, pathlib
 
 service_dir = pathlib.Path.home() / "Library/Services/Clipboard History.workflow/Contents"
-service_dir.mkdir(parents=True, exist_ok=True)
+service_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
 
 workflow = {
     "AMApplicationBuild": "512",
