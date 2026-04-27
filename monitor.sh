@@ -9,8 +9,7 @@ MAX_ENTRY_BYTES=65536
 
 mkdir -p "$HISTORY_DIR"
 chmod 700 "$HISTORY_DIR"
-touch "$HISTORY_FILE"
-chmod 600 "$HISTORY_FILE"
+[ -f "$HISTORY_FILE" ] || install -m 600 /dev/null "$HISTORY_FILE"
 
 last=""
 while true; do
