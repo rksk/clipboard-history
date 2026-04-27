@@ -20,7 +20,16 @@ def osascript(script: str) -> str:
 
 
 def alert(msg: str):
-    osascript(f'display alert "{msg}"')
+    safe = msg.replace("\\", "/").replace('"', "'")
+    osascript(f'display alert "{safe}"')
+
+
+def _safe_preview(text: str) -> str:
+    # Collapse whitespace and truncate, then replace characters that have no
+    # escape sequence in AppleScript string literals. A double-quote terminates
+    # the string in AppleScript; backslash is not an escape character there.
+    collapsed = " ".join(text.split())[:72]
+    return collapsed.replace("\\", "/").replace('"', "'")
 
 
 # ── Load history ──────────────────────────────────────────────────────────────
@@ -51,9 +60,7 @@ if not items:
 # ── Build numbered preview list ───────────────────────────────────────────────
 previews: list[str] = []
 for i, item in enumerate(items, 1):
-    # Collapse whitespace for display; escape double-quotes for AppleScript
-    preview = " ".join(item.split())[:72].replace("\\", "\\\\").replace('"', '\\"')
-    previews.append(f"{i:>2}. {preview}")
+    previews.append(f"{i:>2}. {_safe_preview(item)}")
 
 as_list = "{" + ", ".join(f'"{p}"' for p in previews) + "}"
 
