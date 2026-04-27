@@ -40,7 +40,7 @@ sed "s/YOUR_USERNAME/$(whoami)/g" \
 Load it so it starts now and on every login:
 
 ```bash
-launchctl load ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
 ```
 
 ### 4. Grant permissions
@@ -87,7 +87,7 @@ python3 chooser.py      # launch the chooser dialog
 ## Uninstall
 
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
 rm ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
 rm -rf ~/Library/Services/Clipboard\ History.workflow
 rm -rf ~/.clipboard-history

@@ -28,8 +28,10 @@ def _safe_preview(text: str) -> str:
     # Collapse whitespace and truncate, then replace characters that have no
     # escape sequence in AppleScript string literals. A double-quote terminates
     # the string in AppleScript; backslash is not an escape character there.
+    # Control characters are also stripped as they can cause rendering issues.
     collapsed = " ".join(text.split())[:72]
-    return collapsed.replace("\\", "/").replace('"', "'")
+    cleaned = "".join(c for c in collapsed if ord(c) >= 0x20 and ord(c) != 0x7F)
+    return cleaned.replace("\\", "/").replace('"', "'")
 
 
 # ── Load history ──────────────────────────────────────────────────────────────
@@ -88,7 +90,7 @@ except (ValueError, IndexError):
     sys.exit(1)
 
 # Copy full content back to clipboard
-subprocess.run("pbcopy", input=selected.encode("utf-8"), check=True)
+subprocess.run(["pbcopy"], input=selected.encode("utf-8"), check=True)
 
 # Paste into the frontmost app
 osascript('tell application "System Events" to keystroke "v" using command down')

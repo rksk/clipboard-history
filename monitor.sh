@@ -11,6 +11,8 @@ mkdir -p -m 700 "$HISTORY_DIR"
 [ -f "$HISTORY_FILE" ] || install -m 600 /dev/null "$HISTORY_FILE"
 [ -f "$HISTORY_DIR/monitor.log" ] || install -m 600 /dev/null "$HISTORY_DIR/monitor.log"
 
+trap 'rm -f "$HISTORY_DIR"/.tmp.*' EXIT
+
 last=""
 while true; do
     current=$(pbpaste 2>/dev/null)
