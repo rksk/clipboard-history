@@ -66,8 +66,10 @@ workflow = {
     }
 }
 
-with open(service_dir / "document.wflow", "wb") as f:
+wflow_path = service_dir / "document.wflow"
+with open(wflow_path, "wb") as f:
     plistlib.dump(workflow, f)
+wflow_path.chmod(0o600)
 
 info = {
     "CFBundleIdentifier": "com.apple.automator.Clipboard-History",
@@ -85,7 +87,9 @@ info = {
         }
     ]
 }
-with open(service_dir / "Info.plist", "wb") as f:
+info_path = service_dir / "Info.plist"
+with open(info_path, "wb") as f:
     plistlib.dump(info, f)
+info_path.chmod(0o600)
 
 print("Done:", service_dir.parent)

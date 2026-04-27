@@ -9,6 +9,7 @@ MAX_ENTRY_BYTES=65536
 
 mkdir -p -m 700 "$HISTORY_DIR"
 [ -f "$HISTORY_FILE" ] || install -m 600 /dev/null "$HISTORY_FILE"
+[ -f "$HISTORY_DIR/monitor.log" ] || install -m 600 /dev/null "$HISTORY_DIR/monitor.log"
 
 last=""
 while true; do
@@ -29,6 +30,7 @@ while true; do
         echo "$encoded" > "$tmpfile"
         grep -Fxv "$encoded" "$HISTORY_FILE" 2>/dev/null | head -n $((MAX_ITEMS - 1)) >> "$tmpfile"
         mv "$tmpfile" "$HISTORY_FILE"
+        chmod 600 "$HISTORY_FILE"
     fi
     sleep 1
 done
