@@ -53,14 +53,14 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.clipboard-history.mo
 
 On first use macOS will prompt for:
 
-- **Accessibility** — allows `clipboard-history pick` to simulate `Cmd+V` to paste
+- **Accessibility** — allows `osascript` (via System Events) to simulate `Cmd+V` to paste
 - **Automation** — allows `osascript` to control System Events
 
-You can also grant these in advance under **System Settings -> Privacy & Security**.
+You can also grant these in advance under **System Settings, Privacy & Security**.
 
 ### 6. Assign a keyboard shortcut (recommended)
 
-1. Open **System Settings -> Keyboard -> Keyboard Shortcuts**
+1. Open **System Settings, Keyboard, Keyboard Shortcuts**
 2. Select **Services** in the left sidebar
 3. Scroll to find **Clipboard History** (under General)
 4. Double-click the empty space to the right of it
@@ -98,3 +98,8 @@ rm ~/Library/LaunchAgents/com.clipboard-history.monitor.plist
 rm -rf ~/Library/Services/Clipboard\ History.workflow
 rm -rf ~/.clipboard-history
 ```
+
+Then revoke the permissions granted during installation:
+
+1. Open **System Settings, Privacy & Security, Accessibility** and remove `osascript`
+2. Open **System Settings, Privacy & Security, Automation** and remove `osascript`
