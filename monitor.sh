@@ -8,8 +8,11 @@ MAX_ITEMS=50
 MAX_ENTRY_BYTES=65536
 
 mkdir -p -m 700 "$HISTORY_DIR"
+chmod 700 "$HISTORY_DIR"
 [ -f "$HISTORY_FILE" ] || install -m 600 /dev/null "$HISTORY_FILE"
+chmod 600 "$HISTORY_FILE"
 [ -f "$HISTORY_DIR/monitor.log" ] || install -m 600 /dev/null "$HISTORY_DIR/monitor.log"
+chmod 600 "$HISTORY_DIR/monitor.log"
 
 trap 'rm -f "$HISTORY_DIR"/.tmp.*' EXIT
 
